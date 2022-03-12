@@ -144,7 +144,7 @@ install_acme() {
 echo -e "${green}开始安装${plain}"
 install_base
 install_v2ray
-install_acme
+install_acme $1
 
 echo -e ""
 echo "${green}------------------------------------------${plain}"
