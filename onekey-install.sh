@@ -141,13 +141,15 @@ install_acme() {
     cp /etc/v2ray/v2ray.key /root/.cert/server.key
 }
 
+main(){
 echo -e "${green}开始安装${plain}"
 install_base
-install_acme
 install_v2ray
-
-
+install_acme
 echo -e ""
 echo "${green}------------------------------------------${plain}"
 echo "${green}已完成全部安装过程，祝君使用愉快！${plain}"
 echo "${green}------------------------------------------${plain}"
+}
+
+main
