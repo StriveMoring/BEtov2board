@@ -106,18 +106,14 @@ install_v2ray() {
 
     curl -L -s https://raw.githubusercontent.com/ColetteContreras/v2ray-poseidon/master/install-release.sh | sudo bash
     cd /etc/v2ray/
-    while :; do
+    
     read -t 30 -p "请输入v2board面板节点ID > " nodeId
     sed -i  's/\("nodeId":"\).*/\1'$nodeId'",/g'   config.json
-    done
-    while :; do
     read -t 30 -p "请输入v2board面板URL > " webapi
     sed -i  's/\("webapi":"\).*/\1'"$webapi"'",/g'   config.json
-    done
-    while :; do
     read -t 30 -p "请输入v2board通信密钥 > " token
     sed -i  's/\("token":"\).*/\1'"$token"'",/g'   config.json
-    done
+    
     service v2ray restart
     sleep 2
     check_status
@@ -138,10 +134,8 @@ install_acme() {
     curl  https://get.acme.sh | sh
     source ~/.bashrc
     acme.sh --set-default-ca --server letsencrypt
-    while :; do
     echo "请输入需要申请证书的域名："
     read -t 30 domain
-    done
     sudo ~/.acme.sh/acme.sh --issue -d ${domain} --standalone -k ec-256
     sudo ~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
     mkdir -p /root/.cert
