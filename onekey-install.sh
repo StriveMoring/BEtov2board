@@ -107,8 +107,7 @@ install_v2ray() {
     curl -L -s https://raw.githubusercontent.com/ColetteContreras/v2ray-poseidon/master/install-release.sh | sudo bash
     cd /etc/v2ray/
     
-    read -t 30 -p "请输入v2board面板节点ID > " nodeId
-    sed -i  's/\("nodeId":"\).*/\1'$nodeId'",/g'   config.json
+
     read -t 30 -p "请输入v2board面板URL > " webapi
     sed -i  's/\("webapi":"\).*/\1'"$webapi"'",/g'   config.json
     read -t 30 -p "请输入v2board通信密钥 > " token
