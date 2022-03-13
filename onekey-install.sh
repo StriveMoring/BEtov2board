@@ -132,9 +132,9 @@ install_v2ray() {
 install_acme() {
     curl  https://get.acme.sh | sh
     source ~/.bashrc
-    bash acme.sh --set-default-ca --server letsencrypt
     echo "请输入需要申请证书的域名："
     read domain
+    bash acme.sh --set-default-ca --server letsencrypt
     sudo ~/.acme.sh/acme.sh --issue -d ${domain} --standalone -k ec-256
     sudo ~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
     mkdir -p /root/.cert
