@@ -113,20 +113,6 @@ install_v2ray() {
     sed -i  's/\("webapi":"\).*/\1'"$webapi"'",/g'   config.json
     read -p "请输入v2board通信密钥 > " token
     sed -i  's/\("token":"\).*/\1'"$token"'",/g'   config.json
-    
-    service v2ray restart
-    sleep 2
-    check_status
-    echo -e ""
-    if [[ $? == 0 ]]; then
-        echo -e "${green}v2ray 重启成功${plain}"
-    else
-        echo -e "${red}v2ray 可能启动失败，请稍后使用 tail -f /access.log /error.log 查看日志信息"
-        echo -e "报错信息如下："
-        tail -f /access.log /error.log
-    fi
-
-
 
 }
 
@@ -148,6 +134,19 @@ echo -e "${green}开始安装${plain}"
 install_base
 install_v2ray
 install_acme
+
+service v2ray restart
+sleep 2
+check_status
+echo -e ""
+if [[ $? == 0 ]]; then
+    echo -e "${green}v2ray 重启成功${plain}"
+else
+    echo -e "${red}v2ray 可能启动失败，请稍后使用 tail -f /access.log /error.log 查看日志信息"
+    echo -e "报错信息如下："
+    tail -f /access.log /error.log
+fi
+
 echo -e ""
 echo -e "${green}------------------------------------------${plain}"
 echo -e "${green}已完成全部安装过程，祝君使用愉快！${plain}"
