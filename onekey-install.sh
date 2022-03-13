@@ -108,9 +108,9 @@ install_v2ray() {
     cd /etc/v2ray/
     
 
-    read -t 30 -p "请输入v2board面板URL > " webapi
+    read -p "请输入v2board面板URL > " webapi
     sed -i  's/\("webapi":"\).*/\1'"$webapi"'",/g'   config.json
-    read -t 30 -p "请输入v2board通信密钥 > " token
+    read -p "请输入v2board通信密钥 > " token
     sed -i  's/\("token":"\).*/\1'"$token"'",/g'   config.json
     
     service v2ray restart
@@ -132,9 +132,9 @@ install_v2ray() {
 install_acme() {
     curl  https://get.acme.sh | sh
     source ~/.bashrc
-    acme.sh --set-default-ca --server letsencrypt
+    bash acme.sh --set-default-ca --server letsencrypt
     echo "请输入需要申请证书的域名："
-    read -t 30 domain
+    read domain
     sudo ~/.acme.sh/acme.sh --issue -d ${domain} --standalone -k ec-256
     sudo ~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
     mkdir -p /root/.cert
