@@ -108,11 +108,11 @@ install_v2ray() {
     cd /etc/v2ray/
     
     read -p "请输入v2board面板nodeId > " nodeId
-    sed -i 's!"nodeId": !"nodeId": `nodeId`!g'  config.json
+    sed -i "s!"nodeId": !"nodeId": `nodeId`!g"  config.json
     read -p "请输入v2board面板URL > " webapi
-    sed -i 's!"webapi": !"webapi": `webapi`!g'  config.json
+    sed -i "s!"webapi": !"webapi": `webapi`!g"  config.json
     read -p "请输入v2board通信密钥 > " token
-    sed -i 's!"token": !"token": `token`!g'  config.json
+    sed -i "s!"token": !"token": `token`!g"  config.json
 
 }
 
