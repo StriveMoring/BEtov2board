@@ -17,10 +17,6 @@ echo -e "${green}==============================================================$
 echo -e ""
 
 # check root
-echo -e ""
-echo -e "${green}-------------------------${plain}"
-echo -e "${green}正在检查权限...${plain}"
-echo -e "${green}-------------------------${plain}"
 [[ $EUID -ne 0 ]] && echo -e "${red}错误：${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
 #remove v2ray
@@ -43,10 +39,6 @@ set -
 echo "Logs and configurations are preserved, you can remove these manually"
 echo "logs directory: /var/log/v2ray"
 echo "configuration directory: /etc/v2ray"
-echo -e ""
-echo -e "${green}---------------------------${plain}"
-echo -e "${green}旧版v2ray及服务已清空${plain}"
-echo -e "${green}---------------------------${plain}"
 
 #remove acme.sh
 echo -e ""
@@ -55,11 +47,6 @@ echo -e "${green}正在删除旧版acme.sh及服务...${plain}"
 echo -e "${green}---------------------------${plain}"
 
 rm -rf /root/.acme.sh
-
-echo -e ""
-echo -e "${green}---------------------------${plain}"
-echo -e "${green}旧版acme.sh及服务已清空${plain}"
-echo -e "${green}---------------------------${plain}"
 
 # check os
 echo -e ""
@@ -197,11 +184,6 @@ echo -e "${green}---------------------------${plain}"
 }
 
 main(){
-echo -e ""
-echo -e "${green}---------------------------${plain}"
-echo -e "${green}开始安装进程...${plain}"
-echo -e "${green}---------------------------${plain}"
-
 install_base
 install_v2ray
 install_acme
