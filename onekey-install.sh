@@ -8,22 +8,26 @@ plain='\033[0m'
 cur_dir=$(pwd)
 
 echo -e ""
-echo -e "${green}=====================================================================${plain}"
+echo -e "${green}==============================================================${plain}"
 echo -e "${green}推荐系统:Debian 10+${plain}"
 echo -e "${green}作者：StriveMoring${plain}"
 echo -e "${green}本脚本是用于对接v2board面板的后端ws+tls模式的一键安装脚本${plain}"
 echo -e "${green}祝君食用愉快！${plain}"
-echo -e "${green}=====================================================================${plain}"
+echo -e "${green}==============================================================${plain}"
 echo -e ""
 
 # check root
 echo -e ""
-echo -e "${green}------------------------------------------${plain}"
+echo -e "${green}-------------------------${plain}"
 echo -e "${green}正在检查权限...${plain}"
-echo -e "${green}------------------------------------------${plain}"
+echo -e "${green}-------------------------${plain}"
 [[ $EUID -ne 0 ]] && echo -e "${red}错误：${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
 #remove v2ray
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在删除旧版v2ray及服务...${plain}"
+echo -e "${green}---------------------------${plain}"
 set -x
 
 systemctl stop v2ray
@@ -39,14 +43,30 @@ set -
 echo "Logs and configurations are preserved, you can remove these manually"
 echo "logs directory: /var/log/v2ray"
 echo "configuration directory: /etc/v2ray"
-
-echo -e "${green}旧版本v2ray目录及服务已清空！${plain}"
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}旧版v2ray及服务已清空${plain}"
+echo -e "${green}---------------------------${plain}"
 
 #remove acme.sh
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在删除旧版acme.sh及服务...${plain}"
+echo -e "${green}---------------------------${plain}"
+
 rm -rf /root/.acme.sh
-echo -e "${green}旧版本acme目录及服务已清空！${plain}"
+
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}旧版acme.sh及服务已清空${plain}"
+echo -e "${green}---------------------------${plain}"
 
 # check os
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在检查系统版本...${plain}"
+echo -e "${green}---------------------------${plain}"
+
 if [[ -f /etc/redhat-release ]]; then
     release="centos"
 elif cat /etc/issue | grep -Eqi "debian"; then
@@ -108,6 +128,11 @@ elif [[ x"${release}" == x"debian" ]]; then
 fi
 
 install_base() {
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在更新系统及安装依赖...${plain}"
+echo -e "${green}---------------------------${plain}"
+
     if [[ x"${release}" == x"centos" ]]; then
         yum install epel-release -y
         yum install wget curl unzip tar crontabs socat nano netcat -y
@@ -131,6 +156,11 @@ check_status() {
 }
 
 install_v2ray() {
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在安装v2ray及服务...${plain}"
+echo -e "${green}---------------------------${plain}"
+
     if [[ -e /etc/v2ray/ ]]; then
         rm /etc/v2ray/ -rf
     fi
@@ -148,6 +178,11 @@ install_v2ray() {
 }
 
 install_acme() {
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}正在安装acme.sh及服务...${plain}"
+echo -e "${green}---------------------------${plain}"
+
     curl  https://get.acme.sh | sh
     source ~/.bashrc
     echo "请输入需要申请证书的域名："
@@ -158,10 +193,15 @@ install_acme() {
     mkdir -p /root/.cert
     cp /etc/v2ray/v2ray.crt /root/.cert/server.crt
     cp /etc/v2ray/v2ray.key /root/.cert/server.key
+    
 }
 
 main(){
-echo -e "${green}开始安装${plain}"
+echo -e ""
+echo -e "${green}---------------------------${plain}"
+echo -e "${green}开始安装进程...${plain}"
+echo -e "${green}---------------------------${plain}"
+
 install_base
 install_v2ray
 install_acme
@@ -171,11 +211,18 @@ sleep 2
 check_status
 echo -e ""
 if [[ $? == 0 ]]; then
-    echo -e "${green}v2ray 重启成功${plain}"
+    echo -e ""
+    echo -e "${green}-------------------------${plain}"
+    echo -e "${green}v2ray重启成功!!${plain}"
+    echo -e "${green}-------------------------${plain}"
 else
+    echo -e ""
+    echo -e "${green}---------------------------${plain}"
     echo -e "${red}v2ray 可能启动失败，请稍后使用 tail -f /access.log /error.log 查看日志信息"
     echo -e "报错信息如下："
     tail -f /access.log /error.log
+    echo -e "${green}---------------------------${plain}"
+
 fi
 
 echo -e ""
