@@ -1,10 +1,10 @@
 #!/bin/bash
-#====================================================
-#	推荐系统:Debian 10+
-#	作者：StriveMoring
-#	本脚本是用于对接v2board面板的后端ws+tls模式的一键安装脚本
-#	祝君食用愉快！
-#====================================================
+echo "===================================================="
+echo "	推荐系统:Debian 10+"
+echo "	作者：StriveMoring"
+echo "	本脚本是用于对接v2board面板的后端ws+tls模式的一键安装脚本"
+echo "	祝君食用愉快！"
+echo "===================================================="
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
@@ -32,9 +32,11 @@ echo "Logs and configurations are preserved, you can remove these manually"
 echo "logs directory: /var/log/v2ray"
 echo "configuration directory: /etc/v2ray"
 
+echo -e "${green}旧版本v2ray目录及服务已清空！${plain}"
+
 #remove acme.sh
 rm -rf /root/.acme.sh
-
+echo -e "${green}旧版本acme目录及服务已清空！${plain}"
 
 # check os
 if [[ -f /etc/redhat-release ]]; then
