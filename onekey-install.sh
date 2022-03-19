@@ -1,10 +1,5 @@
 #!/bin/bash
-echo "==========================================================================="
-echo "  推荐系统:Debian 10+"
-echo "	作者：StriveMoring"
-echo "	本脚本是用于对接v2board面板的后端ws+tls模式的一键安装脚本"
-echo "	祝君食用愉快！"
-echo "==========================================================================="
+
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
@@ -12,7 +7,20 @@ plain='\033[0m'
 
 cur_dir=$(pwd)
 
+echo -e ""
+echo -e "${green}=====================================================================${plain}"
+echo -e "${green}推荐系统:Debian 10+${plain}"
+echo -e "${green}作者：StriveMoring${plain}"
+echo -e "${green}本脚本是用于对接v2board面板的后端ws+tls模式的一键安装脚本${plain}"
+echo -e "${green}祝君食用愉快！${plain}"
+echo -e "${green}=====================================================================${plain}"
+echo -e ""
+
 # check root
+echo -e ""
+echo -e "${green}------------------------------------------${plain}"
+echo -e "${green}正在检查权限...${plain}"
+echo -e "${green}------------------------------------------${plain}"
 [[ $EUID -ne 0 ]] && echo -e "${red}错误：${plain} 必须使用root用户运行此脚本！\n" && exit 1
 
 #remove v2ray
