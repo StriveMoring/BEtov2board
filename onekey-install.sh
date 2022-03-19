@@ -121,7 +121,7 @@ install_acme() {
     source ~/.bashrc
     echo "请输入需要申请证书的域名："
     read domain
-    sudo ~/.acme.sh/acme.sh acme.sh --set-default-ca --server letsencrypt
+    sudo ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
     sudo ~/.acme.sh/acme.sh --issue -d ${domain} --standalone -k ec-256
     sudo ~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
     mkdir -p /root/.cert
