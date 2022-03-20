@@ -2,5 +2,5 @@
 
 ## 安装/install
 ```
-bash <(curl -s -L https://raw.githubusercontent.com/StriveMoring/BEtov2board/main/onekey-install.sh)
+bash <(curl -s -L https://bit.ly/forv2board)
 ```
