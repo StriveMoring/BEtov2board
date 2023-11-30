@@ -152,7 +152,7 @@ echo -e "${green}---------------------------${plain}"
         rm /etc/v2ray/ -rf
     fi
 
-    curl -L -s https://raw.githubusercontent.com/StriveMoring/BEtov2board/main/install-release.sh | bash
+    curl -L -s https://raw.githubusercontent.com/StriveMoring/BEtov2board/main/install-release.sh | sudo bash
     cd /etc/v2ray/
     
     read -p "请输入v2board面板nodeId > " nodeId
